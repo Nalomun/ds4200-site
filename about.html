@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quinn Lambert | Hekir</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <a class="logo" href="index.html">QL</a>
+    <nav>
+      <a href="index.html">About Me</a>
+      <a href="hekir.html" class="active">Hekir Project</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section>
+      <p class="eyebrow">Project</p>
+      <h2>Hekir: Do Sector Labels Match What Companies Actually Do?</h2>
+    </section>
+
+    <section class="card">
+      <p>
+        Every company in the S&amp;P 500 gets a GICS sector label, like Energy, Utilities or
+        Information Technology. Investors lean on these labels constantly: to pick comparable
+        companies, to build benchmarks, and to decide what a stock "should" move with. I wanted to
+        know whether the labels actually line up with how companies describe their own businesses.
+      </p>
+      <p>
+        So I took the business description of all 499 companies (merging dual share classes like
+        GOOGL and GOOG), turned each one into a vector with a sentence-embedding model, and for every
+        company pulled the 10 companies whose descriptions were closest to it. Then I counted how
+        many of those neighbors stayed in the same sector, and compared that against 10,000 runs
+        where the sector labels were shuffled randomly.
+      </p>
+      <p>
+        The short answer is that the labels mostly hold up. About 66% of nearest neighbors share
+        the company's sector, against roughly 11% by chance. That varies a lot by sector, though,
+        which is what the chart below shows. Utilities and Energy companies describe themselves in
+        very similar language, while Industrials and Consumer Discretionary are much looser groups.
+      </p>
+      <p>
+        I also checked whether the description-based peers actually move together in the market.
+        They do, a bit more than same-sector peers (an average daily-return correlation of 0.335
+        versus 0.275). The part I found most interesting was the 83 companies that looked
+        "misplaced." For them, that advantage disappears completely, so the disagreement doesn't
+        mean GICS got them wrong. Not the headline I was hoping for, but it's the honest one.
+      </p>
+    </section>
+
+    <section class="card">
+      <h3>Sector cohesion, measured against chance</h3>
+      <p class="chart-sub">
+        How many times more often a company's 10 nearest peers share its sector than random
+        labels would predict.
+      </p>
+      <div id="chart"></div>
+    </section>
+
+    <section class="card">
+      <h3>How it works, step by step</h3>
+      <ol>
+        <li>Pull the S&amp;P 500 list and each company's business summary.</li>
+        <li>Embed every summary with the <code>all-MiniLM-L6-v2</code> model, splitting long summaries into chunks and averaging them.</li>
+        <li>Find each company's 10 nearest neighbors by cosine similarity.</li>
+        <li>Compare the sector overlap against 10,000 random shuffles of the sector labels.</li>
+        <li>Test co-movement using a year of daily returns (July 2025 to June 2026).</li>
+      </ol>
+    </section>
+
+    <figure class="card figure">
+      <img src="images/hekir-umap.png" alt="UMAP scatter plot of the 499 company embeddings, colored by GICS sector, showing sectors forming mostly separate clusters">
+      <figcaption>
+        All 499 companies squashed down to two dimensions (UMAP), colored by GICS sector. Most
+        sectors form their own clusters; the overlap in the middle is where things get interesting.
+      </figcaption>
+    </figure>
+
+    <section class="card">
+      <p class="small">
+        Hekir started as a homework assignment for another class. I designed the study and made the
+        calls on what the results mean; the code was written with Claude Code. Full write-up and code:
+        <a href="https://github.com/Nalomun/hekir" target="_blank" rel="noopener">github.com/Nalomun/hekir</a>.
+      </p>
+    </section>
+
+    <section id="contact" class="card contact">
+      <h3>Contact</h3>
+      <ul class="contact-links">
+        <li><a href="mailto:YOUR_EMAIL_HERE">Email</a></li>
+        <li><a href="https://github.com/Nalomun" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/YOUR_LINKEDIN_HERE" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="https://quinnlambert.com" target="_blank" rel="noopener">quinnlambert.com</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Built for DS4200 &middot; Hosted on GitHub Pages</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+  <script src="js/chart.js"></script>
+</body>
+</html>

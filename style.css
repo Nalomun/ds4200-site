@@ -1,0 +1,183 @@
+/* ---------- Color scheme ---------- */
+:root {
+  --bg: #0e0a16;
+  --surface: #161021;
+  --border: #2a2138;
+  --text: #ece8f4;
+  --muted: #a69cba;
+  --accent: #9d7bea;
+  --accent-light: #c6b0ff;
+}
+
+/* ---------- Base + typography ---------- */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+h1, h2, h3 {
+  font-family: "Space Grotesk", sans-serif;
+  line-height: 1.15;
+  margin: 0 0 0.5em;
+}
+
+h1 { font-size: 3.2rem; letter-spacing: -0.02em; }   /* main heading on home page */
+h2 { font-size: 2.1rem; letter-spacing: -0.01em; }   /* smaller page heading on Hekir page */
+h3 { font-size: 1.25rem; color: var(--accent-light); }
+
+p { margin: 0 0 1.1em; }
+p:last-child { margin-bottom: 0; }
+
+a { color: var(--accent-light); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { color: #fff; }
+
+code {
+  font-size: 0.9em;
+  background: var(--border);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+}
+
+.eyebrow {
+  font-family: "Space Grotesk", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-size: 0.8rem;
+  color: var(--accent);
+  margin-bottom: 0.6em;
+}
+
+.lead { font-size: 1.2rem; color: var(--muted); }
+.small { font-size: 0.92rem; color: var(--muted); }
+
+/* ---------- Header / navigation ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: rgba(14, 10, 22, 0.9);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+
+.logo {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 1.3rem;
+  text-decoration: none;
+  color: var(--text);
+}
+
+nav { display: flex; gap: 1.75rem; }
+
+nav a {
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 500;
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+}
+
+nav a:hover, nav a.active { color: var(--text); border-bottom-color: var(--accent); }
+
+/* ---------- Layout ---------- */
+.container {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 3.5rem 1.5rem 2rem;
+}
+
+section, figure { margin: 0 0 2rem; }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 2rem 2.25rem;
+}
+
+.hero {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.hero-text { flex: 1; }
+
+.portrait {
+  width: 210px;
+  height: 210px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid var(--accent);
+}
+
+.figure img {
+  width: 100%;
+  border-radius: 8px;
+  background: #fff;
+}
+
+figcaption { margin-top: 0.9rem; font-size: 0.92rem; color: var(--muted); }
+
+ol, ul { padding-left: 1.4rem; margin: 0; }
+li { margin-bottom: 0.4rem; }
+
+.contact-links {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.contact-links a {
+  display: inline-block;
+  padding: 0.45rem 1.1rem;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  text-decoration: none;
+}
+
+.contact-links a:hover { background: var(--accent); color: var(--bg); }
+
+.site-footer {
+  text-align: center;
+  padding: 2rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+}
+
+/* ---------- D3 chart ---------- */
+.chart-sub { font-size: 0.92rem; color: var(--muted); }
+
+#chart svg { display: block; width: 100%; height: auto; }
+
+.bar { fill: var(--accent); }
+.bar:hover { fill: var(--accent-light); }
+.value { fill: var(--text); font-size: 12px; }
+.axis text { fill: var(--muted); font-size: 12px; }
+.axis path, .axis line { stroke: var(--border); }
+.axis-label { fill: var(--muted); font-size: 12px; }
+
+/* ---------- Small screens ---------- */
+@media (max-width: 640px) {
+  h1 { font-size: 2.4rem; }
+  h2 { font-size: 1.7rem; }
+  .hero { flex-direction: column-reverse; align-items: flex-start; }
+  .card { padding: 1.5rem; }
+  .site-header { padding: 1rem; }
+  nav { gap: 1rem; font-size: 0.9rem; }
+}

@@ -1,0 +1,12 @@
+sector,firms,in_sector_pct,lift
+Utilities,31,90.0,14.9
+Energy,21,59.5,14.8
+Communication Services,20,48.5,12.7
+Real Estate,31,64.5,10.7
+Consumer Staples,36,74.2,10.6
+Health Care,59,86.6,7.4
+Financials,75,84.7,5.7
+Materials,26,25.8,5.1
+Information Technology,72,70.6,4.9
+Consumer Discretionary,48,34.0,3.6
+Industrials,80,55.0,3.5
